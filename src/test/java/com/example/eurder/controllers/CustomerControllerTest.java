@@ -18,6 +18,7 @@ class CustomerControllerTest {
     CustomerController customerController;
     @Autowired
     CustomerRepository customerRepository;
+
     @Test
     void addNewCustomeIsSucessful(){
         //given
