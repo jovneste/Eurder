@@ -1,7 +1,7 @@
 package com.example.eurder.controllers;
 
 import com.example.eurder.domain.dtos.CustomerDto;
-import com.example.eurder.repositories.CustomerRepository;
+import com.example.eurder.repositories.UserRepository;
 import com.example.eurder.services.CustomerService;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -12,13 +12,13 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class CustomerControllerIntegationTest {
+public class UserControllerIntegationTest {
 
     @LocalServerPort
     private int port;
 
     @Autowired
-    CustomerRepository customerRepository;
+    UserRepository userRepository;
 
     @Autowired
     CustomerService customerService;

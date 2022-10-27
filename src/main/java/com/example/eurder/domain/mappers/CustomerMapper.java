@@ -1,14 +1,15 @@
 package com.example.eurder.domain.mappers;
 
-import com.example.eurder.domain.Customer;
+import com.example.eurder.domain.User;
 import com.example.eurder.domain.dtos.CustomerDto;
+import com.example.eurder.domain.dtos.NewCustomerDto;
 
 public class CustomerMapper {
-    public Customer customerDtoToCustomer(CustomerDto customerDto){
-        return new Customer(customerDto.getFirstName(),customerDto.getLastName(), customerDto.getEmailAddress(), customerDto.getAddress(), customerDto.getPhoneNumber());
+    public User newcustomerDtoToCustomer(NewCustomerDto newCustomerDto){
+        return new User(newCustomerDto.getFirstName(),newCustomerDto.getLastName(), newCustomerDto.getEmailAddress(), newCustomerDto.getAddress(), newCustomerDto.getPhoneNumber(),newCustomerDto.getPassword());
 
     }
-    public CustomerDto customerToCustomerDto(Customer customer){
-        return new CustomerDto(customer.getFirstName(), customer.getLastName(), customer.getEmailAdress(), customer.getAddress(), customer.getPhoneNumber());
+    public CustomerDto customerToCustomerDto(User user){
+        return new CustomerDto(user.getFirstName(), user.getLastName(), user.getEmailAdress(), user.getAddress(), user.getPhoneNumber());
     }
 }

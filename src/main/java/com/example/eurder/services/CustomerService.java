@@ -1,10 +1,11 @@
 package com.example.eurder.services;
 
-import com.example.eurder.domain.Customer;
+import com.example.eurder.domain.User;
 import com.example.eurder.domain.dtos.CustomerDto;
+import com.example.eurder.domain.dtos.NewCustomerDto;
 import com.example.eurder.domain.mappers.CustomerMapper;
 import com.example.eurder.exceptions.customerexceptions.*;
-import com.example.eurder.repositories.CustomerRepository;
+import com.example.eurder.repositories.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -14,24 +15,24 @@ import java.util.Objects;
 @Service
 public class CustomerService {
     private final Logger logger = LoggerFactory.getLogger(CustomerService.class);
-    CustomerRepository customerRepository;
+    UserRepository userRepository;
     CustomerMapper customerMapper;
 
-    public CustomerService(CustomerRepository customerRepository) {
-        this.customerRepository = customerRepository;
+    public CustomerService(UserRepository userRepository) {
+        this.userRepository = userRepository;
         this.customerMapper = new CustomerMapper();
     }
 
-    public CustomerDto addCustomer(CustomerDto customerDto) {
+    public CustomerDto addCustomer(NewCustomerDto newCustomerDto) {
 
-        checkRequiredFields(customerDto);
-        Customer newCustomer = customerMapper.customerDtoToCustomer(customerDto);
-        customerRepository.save(newCustomer);
-        return customerMapper.customerToCustomerDto(newCustomer);
+        checkRequiredFields(newCustomerDto);
+        User newUser = customerMapper.newcustomerDtoToCustomer(newCustomerDto);
+        userRepository.save(newUser);
+        return customerMapper.customerToCustomerDto(newUser);
 
     }
 
-    public void checkRequiredFields(CustomerDto customerDto){
+    public void checkRequiredFields(NewCustomerDto customerDto){
 
         if(customerDto.getEmailAddress() == null || Objects.equals(customerDto.getEmailAddress(), "")){
             logger.error("An email-address is required to create a customer");

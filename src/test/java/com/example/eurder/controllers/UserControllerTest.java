@@ -1,8 +1,9 @@
 package com.example.eurder.controllers;
 
 import com.example.eurder.domain.dtos.CustomerDto;
+import com.example.eurder.domain.dtos.NewCustomerDto;
 import com.example.eurder.exceptions.customerexceptions.*;
-import com.example.eurder.repositories.CustomerRepository;
+import com.example.eurder.repositories.UserRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,29 +11,29 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class CustomerControllerTest {
+class UserControllerTest {
 
     @LocalServerPort
     private int port;
     @Autowired
     CustomerController customerController;
     @Autowired
-    CustomerRepository customerRepository;
+    UserRepository userRepository;
 
     @Test
     void addNewCustomeIsSucessful(){
         //given
-        CustomerDto customerDto = new CustomerDto("Peter","Parker"
-                ,"definitelynotspiderman@hotmailcom","someStreet","456");
+        NewCustomerDto customerDto = new NewCustomerDto("Peter","Parker"
+                ,"definitelynotspiderman@hotmailcom","someStreet","456","pass");
         //when
         customerController.addCustomer(customerDto);
         //then
-        Assertions.assertTrue(customerRepository.getCustomerDatabase().containsKey("definitelynotspiderman@hotmailcom"));
+        Assertions.assertTrue(userRepository.getUserDatabase().containsKey("definitelynotspiderman@hotmailcom"));
     }
     @Test
     void addingCustomerWithoutEmail_ThrowsEamilRequiredException(){
-        CustomerDto customerDto = new CustomerDto("Peter","Parker"
-                ,"","someStreet","456");
+        NewCustomerDto customerDto = new NewCustomerDto("Peter","Parker"
+                ,"","someStreet","456","pass");
         //when
 
         //then
@@ -40,8 +41,8 @@ class CustomerControllerTest {
     }
     @Test
     void addingCustomerWithoutFirstName_ThrowsRequiredException(){
-        CustomerDto customerDto = new CustomerDto("","Parker"
-                ,"someemail@hotmail.com","someStreet","456");
+        NewCustomerDto customerDto = new NewCustomerDto("","Parker"
+                ,"definitelynotspiderman@hotmailcom","someStreet","456","pass");
         //when
 
         //then
@@ -49,8 +50,8 @@ class CustomerControllerTest {
     }
     @Test
     void addingCustomerWithoutLastName_ThrowsRequiredException(){
-        CustomerDto customerDto = new CustomerDto("f",""
-                ,"someemail@hotmail.com","someStreet","456");
+        NewCustomerDto customerDto = new NewCustomerDto("Peter",""
+                ,"definitelynotspiderman@hotmailcom","someStreet","456","pass");
         //when
 
         //then
@@ -58,8 +59,8 @@ class CustomerControllerTest {
     }
     @Test
     void addingCustomerWithoutAdress_ThrowsRequiredException(){
-        CustomerDto customerDto = new CustomerDto("f","f"
-                ,"someemail@hotmail.com","","456");
+        NewCustomerDto customerDto = new NewCustomerDto("Peter","Parker"
+                ,"definitelynotspiderman@hotmailcom","","456","pass");
         //when
 
         //then
@@ -67,8 +68,8 @@ class CustomerControllerTest {
     }
     @Test
     void addingCustomerWithoutPhoneNumber_ThrowsRequiredException(){
-        CustomerDto customerDto = new CustomerDto("f","f"
-                ,"someemail@hotmail.com","street123","");
+        NewCustomerDto customerDto = new NewCustomerDto("Peter","Parker"
+                ,"definitelynotspiderman@hotmailcom","someStreet","","pass");
         //when
 
         //then

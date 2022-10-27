@@ -34,6 +34,9 @@ class ItemControllerTest {
 
         ItemDto result = RestAssured
                 .given()
+                .auth()
+                .preemptive()
+                .basic("admin@eurder.com","root")
                 .contentType(ContentType.JSON)
                 .baseUri("http://localhost")
                 .port(port)

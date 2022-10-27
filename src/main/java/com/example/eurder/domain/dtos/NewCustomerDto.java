@@ -1,21 +1,27 @@
-package com.example.eurder.domain;
+package com.example.eurder.domain.dtos;
 
-public class Customer {
+import com.example.eurder.security.Role;
+
+public class NewCustomerDto {
     private String firstName;
     private String lastName;
     private String emailAdress;
     private String address;
     private String phoneNumber;
+    private String password;
+    private Role role;
 
-    public Customer(String firstName, String lastName, String emailAdress, String address, String phoneNumber) {
+
+    public NewCustomerDto(String firstName, String lastName, String emailAdress, String address, String phoneNumber,String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.emailAdress = emailAdress;
         this.address = address;
         this.phoneNumber = phoneNumber;
+        this.password = password;
     }
 
-    public String getEmailAdress() {
+    public String getEmailAddress() {
         return emailAdress;
     }
 
@@ -33,5 +39,9 @@ public class Customer {
 
     public String getPhoneNumber() {
         return phoneNumber;
+    }
+
+    public String getPassword() {
+        return password;
     }
 }

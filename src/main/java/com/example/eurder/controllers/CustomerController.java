@@ -1,6 +1,7 @@
 package com.example.eurder.controllers;
 
 import com.example.eurder.domain.dtos.CustomerDto;
+import com.example.eurder.domain.dtos.NewCustomerDto;
 import com.example.eurder.services.CustomerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,8 +23,8 @@ public class CustomerController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public CustomerDto addCustomer(@RequestBody CustomerDto customerDto){
-        log.info("adding the following customer" +customerDto);
-        return customerService.addCustomer(customerDto);
+    public CustomerDto addCustomer(@RequestBody NewCustomerDto newCustomerDto){
+        log.info("adding the following customer" +newCustomerDto);
+        return customerService.addCustomer(newCustomerDto);
     }
 }
