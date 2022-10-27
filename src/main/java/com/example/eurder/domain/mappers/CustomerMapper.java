@@ -5,7 +5,7 @@ import com.example.eurder.domain.dtos.CustomerDto;
 
 public class CustomerMapper {
     public Customer customerDtoToCustomer(CustomerDto customerDto){
-        return new Customer(customerDto.getFirstName(),customerDto.getLastName(), customerDto.getEmailAdress(), customerDto.getAddress(), customerDto.getPhoneNumber());
+        return new Customer(customerDto.getFirstName(),customerDto.getLastName(), customerDto.getEmailAddress(), customerDto.getAddress(), customerDto.getPhoneNumber());
 
     }
     public CustomerDto customerToCustomerDto(Customer customer){
