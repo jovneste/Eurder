@@ -1,15 +1,13 @@
 package com.example.eurder.controllers;
 
 import com.example.eurder.domain.dtos.CustomerDto;
-import com.example.eurder.exceptions.*;
+import com.example.eurder.exceptions.customerexceptions.*;
 import com.example.eurder.repositories.CustomerRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class CustomerControllerTest {

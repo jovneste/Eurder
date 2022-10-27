@@ -3,7 +3,7 @@ package com.example.eurder.services;
 import com.example.eurder.domain.Customer;
 import com.example.eurder.domain.dtos.CustomerDto;
 import com.example.eurder.domain.mappers.CustomerMapper;
-import com.example.eurder.exceptions.*;
+import com.example.eurder.exceptions.customerexceptions.*;
 import com.example.eurder.repositories.CustomerRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
