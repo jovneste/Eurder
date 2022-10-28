@@ -2,6 +2,7 @@ package com.example.eurder.controllers;
 
 
 import com.example.eurder.domain.dtos.NewOrderDto;
+import com.example.eurder.domain.dtos.ReturnOrderDto;
 import com.example.eurder.repositories.OrderRepository;
 import com.example.eurder.repositories.UserRepository;
 import io.restassured.RestAssured;
@@ -29,11 +30,11 @@ class OrderControllerTest {
     void customerMakesAnOrder_HappyPath(){
 
         String requestedBody = "{\"customer\":{\"firstName\":\"a\",\"lastName\":\"b\",\"emailAdress\":\"A@B.com\",\"address\":\"str\",\"phoneNumber\":\"555\",\"password\":\"pass\"},\"itemGroupList\":[{\"item\":{\"name\":\"phoenixdown\",\"description\":\"item\",\"price\":5,\"amountInStock\":4},\"amountToOrder\":10}]}";
-        NewOrderDto result = RestAssured
+        ReturnOrderDto result = RestAssured
                 .given()
                 .auth()
                 .preemptive()
-                .basic("Customer@eurder.com","root")
+                .basic("customer@eurder.com","root")
                 .contentType(ContentType.JSON)
                 .baseUri("http://localhost")
                 .port(port)
@@ -45,7 +46,7 @@ class OrderControllerTest {
                 .assertThat()
                 .statusCode(HttpStatus.CREATED.value())
                 .extract()
-                .as(NewOrderDto.class);
+                .as(ReturnOrderDto.class);
     }
     @Test
     void unregisterdUserMakesAnOrder_HappyPath(){
