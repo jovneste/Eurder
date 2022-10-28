@@ -75,4 +75,27 @@ public class UserControllerIntegationTest {
                 .as(CustomerDto[].class);
         Assertions.assertEquals(expectedList.get(0).getEmailAddress(),List.of(result).get(0).getEmailAddress());
     }
+    @Test
+    void customerTriesToViewsAllCustomers_ThrowsUnauthorisedException (){
+
+
+
+       RestAssured
+                .given()
+                .auth()
+                .preemptive()
+                .basic("customern@eurder.com","root")
+                .contentType(ContentType.JSON)
+                .baseUri("http://localhost")
+                .port(port)
+                .when()
+                .accept(ContentType.JSON)
+                .get("/customers/")
+                .then()
+                .assertThat()
+                .statusCode(HttpStatus.UNAUTHORIZED.value())
+                .extract();
+
+
+    }
 }
