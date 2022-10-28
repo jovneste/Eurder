@@ -38,4 +38,8 @@ public class Order {
     public User getCustomer() {
         return customer;
     }
+
+    public BigDecimal getTotalPrice() {
+        return totalPrice;
+    }
 }

@@ -6,6 +6,7 @@ import com.example.eurder.exceptions.securityexceptions.UnknownUserException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import javax.servlet.http.HttpServletResponse;
@@ -42,4 +43,6 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
     protected void UnkowUserException(UnknownUserException ex, HttpServletResponse response) throws IOException{
         response.sendError(HttpStatus.UNAUTHORIZED.value(),"You are not a registered customer, please register before continuing");
     }
+
+
 }

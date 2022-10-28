@@ -7,7 +7,7 @@ import static com.google.common.collect.Lists.newArrayList;
 
 public enum Role {
     CUSTOMER(newArrayList(Feature.ORDER)),
-    ADMIN(newArrayList(Feature.ADD_ITEM));
+    ADMIN(newArrayList(Feature.ADD_ITEM,Feature.VIEW_CUSTOMERS));
 
     private List<Feature> featureList;
 

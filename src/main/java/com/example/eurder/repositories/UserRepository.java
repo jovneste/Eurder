@@ -14,11 +14,11 @@ public class UserRepository {
         userDatabase.put("admin@eurder.com",new User("admin","adminson","admin@eurder.com","street"
                 ,"044","root"));
         userDatabase.get("admin@eurder.com").setRole(Role.ADMIN);
-        userDatabase.put("Customer@eurder.com",new User("customer","notadminson","Customer@eurder.com","street"
+        userDatabase.put("customer@eurder.com",new User("customer","notadminson","customer@eurder.com","street"
                 ,"044","root"));
     }
     public void save(User user) {
-        userDatabase.put(user.getEmailAdress(), user);
+        userDatabase.put(user.getEmailAddress(), user);
     }
 
     public ConcurrentHashMap<String, User> getUserDatabase() {

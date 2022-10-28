@@ -1,7 +1,8 @@
 package com.example.eurder.controllers;
 
 
-import com.example.eurder.domain.dtos.OrderDto;
+import com.example.eurder.domain.dtos.NewOrderDto;
+import com.example.eurder.domain.dtos.ReturnOrderDto;
 import com.example.eurder.security.Feature;
 import com.example.eurder.security.SecurityService;
 import com.example.eurder.services.OrderService;
@@ -25,10 +26,10 @@ public class OrderController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public OrderDto addCustomer(@RequestHeader String authorization,@RequestBody OrderDto orderDto){
-        log.info("adding the following order " +orderDto);
+    public ReturnOrderDto addCustomer(@RequestHeader String authorization, @RequestBody NewOrderDto newOrderDto){
+        log.info("adding the following order " + newOrderDto);
         securityService.validateAuthorization(authorization, Feature.ORDER);
-        return orderService.addOrder(orderDto);
+        return orderService.addOrder(newOrderDto);
     }
 
 }

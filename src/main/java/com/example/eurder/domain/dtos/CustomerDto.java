@@ -1,5 +1,7 @@
 package com.example.eurder.domain.dtos;
 
+import java.util.Objects;
+
 public class CustomerDto {
     private String firstName;
     private String lastName;
@@ -18,6 +20,8 @@ public class CustomerDto {
     public String getFirstName() {
         return firstName;
     }
+
+
 
     public String getLastName() {
         return lastName;

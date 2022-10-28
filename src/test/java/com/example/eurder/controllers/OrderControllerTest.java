@@ -1,7 +1,7 @@
 package com.example.eurder.controllers;
 
 
-import com.example.eurder.domain.dtos.OrderDto;
+import com.example.eurder.domain.dtos.NewOrderDto;
 import com.example.eurder.repositories.OrderRepository;
 import com.example.eurder.repositories.UserRepository;
 import io.restassured.RestAssured;
@@ -29,7 +29,7 @@ class OrderControllerTest {
     void customerMakesAnOrder_HappyPath(){
 
         String requestedBody = "{\"customer\":{\"firstName\":\"a\",\"lastName\":\"b\",\"emailAdress\":\"A@B.com\",\"address\":\"str\",\"phoneNumber\":\"555\",\"password\":\"pass\"},\"itemGroupList\":[{\"item\":{\"name\":\"phoenixdown\",\"description\":\"item\",\"price\":5,\"amountInStock\":4},\"amountToOrder\":10}]}";
-        OrderDto result = RestAssured
+        NewOrderDto result = RestAssured
                 .given()
                 .auth()
                 .preemptive()
@@ -45,7 +45,7 @@ class OrderControllerTest {
                 .assertThat()
                 .statusCode(HttpStatus.CREATED.value())
                 .extract()
-                .as(OrderDto.class);
+                .as(NewOrderDto.class);
     }
     @Test
     void unregisterdUserMakesAnOrder_HappyPath(){

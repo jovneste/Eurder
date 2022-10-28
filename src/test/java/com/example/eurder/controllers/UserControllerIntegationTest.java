@@ -5,11 +5,15 @@ import com.example.eurder.repositories.UserRepository;
 import com.example.eurder.services.CustomerService;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class UserControllerIntegationTest {
@@ -45,5 +49,30 @@ public class UserControllerIntegationTest {
                 .extract()
                 .as(CustomerDto.class);
 
+    }
+    @Test
+    void adminViewsAllCustomersHappyPath(){
+
+        List<CustomerDto> expectedList = new ArrayList<>();
+        expectedList.add(new CustomerDto("customer","notadminson"
+                ,"customer@eurder.com","street","044"));
+
+        CustomerDto[] result = RestAssured
+                .given()
+                .auth()
+                .preemptive()
+                .basic("admin@eurder.com","root")
+                .contentType(ContentType.JSON)
+                .baseUri("http://localhost")
+                .port(port)
+                .when()
+                .accept(ContentType.JSON)
+                .get("/customers/")
+                .then()
+                .assertThat()
+                .statusCode(HttpStatus.OK.value())
+                .extract()
+                .as(CustomerDto[].class);
+        Assertions.assertEquals(expectedList.get(0).getEmailAddress(),List.of(result).get(0).getEmailAddress());
     }
 }

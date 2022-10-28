@@ -5,13 +5,13 @@ import com.example.eurder.domain.User;
 
 import java.util.List;
 
-public class OrderDto {
+public class NewOrderDto {
 
 
     private User customer;
     private List<ItemGroup> itemGroupList;
 
-    public OrderDto(List<ItemGroup> itemGroupList,User customer) {
+    public NewOrderDto(List<ItemGroup> itemGroupList, User customer) {
         this.itemGroupList = itemGroupList;
         this.customer =customer;
     }
