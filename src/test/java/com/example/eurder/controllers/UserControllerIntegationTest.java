@@ -73,7 +73,7 @@ public class UserControllerIntegationTest {
                 .statusCode(HttpStatus.OK.value())
                 .extract()
                 .as(CustomerDto[].class);
-        Assertions.assertEquals(expectedList.get(0).getEmailAddress(),List.of(result).get(0).getEmailAddress());
+        Assertions.assertEquals(expectedList.get(0).getPhoneNumber(),List.of(result).get(0).getPhoneNumber());
     }
     @Test
     void customerTriesToViewsAllCustomers_ThrowsUnauthorisedException (){

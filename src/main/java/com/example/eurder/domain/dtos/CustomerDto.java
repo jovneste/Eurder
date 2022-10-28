@@ -64,4 +64,17 @@ public class CustomerDto {
     public String getCustomerID() {
         return customerID;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CustomerDto that = (CustomerDto) o;
+        return Objects.equals(getCustomerID(), that.getCustomerID()) && Objects.equals(getFirstName(), that.getFirstName()) && Objects.equals(getLastName(), that.getLastName()) && Objects.equals(getEmailAddress(), that.getEmailAddress()) && Objects.equals(getAddress(), that.getAddress()) && Objects.equals(getPhoneNumber(), that.getPhoneNumber());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getCustomerID(), getFirstName(), getLastName(), getEmailAddress(), getAddress(), getPhoneNumber());
+    }
 }
