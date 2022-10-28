@@ -54,7 +54,7 @@ public class UserControllerIntegationTest {
     void adminViewsAllCustomersHappyPath(){
 
         List<CustomerDto> expectedList = new ArrayList<>();
-        expectedList.add(new CustomerDto("customer","notadminson"
+        expectedList.add(new CustomerDto("1","customer","notadminson"
                 ,"customer@eurder.com","street","044"));
 
         CustomerDto[] result = RestAssured
@@ -78,13 +78,11 @@ public class UserControllerIntegationTest {
     @Test
     void customerTriesToViewsAllCustomers_ThrowsUnauthorisedException (){
 
-
-
        RestAssured
                 .given()
                 .auth()
                 .preemptive()
-                .basic("customern@eurder.com","root")
+                .basic("customer@eurder.com","root")
                 .contentType(ContentType.JSON)
                 .baseUri("http://localhost")
                 .port(port)
@@ -94,6 +92,29 @@ public class UserControllerIntegationTest {
                 .then()
                 .assertThat()
                 .statusCode(HttpStatus.UNAUTHORIZED.value())
+                .extract();
+
+
+    }
+    @Test
+    void AdminTriesToViewsSingleCustomer_HappyPath (){
+
+
+        String userId = userRepository.getUserByID(userRepository.getUserDatabase().get("customer@eurder.com").getUserId()).getUserId();
+        RestAssured
+                .given()
+                .auth()
+                .preemptive()
+                .basic("admin@eurder.com","root")
+                .contentType(ContentType.JSON)
+                .baseUri("http://localhost")
+                .port(port)
+                .when()
+                .accept(ContentType.JSON)
+                .get("/customers/" + userId)
+                .then()
+                .assertThat()
+                .statusCode(HttpStatus.OK.value())
                 .extract();
 
 

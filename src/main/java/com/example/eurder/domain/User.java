@@ -3,7 +3,10 @@ package com.example.eurder.domain;
 import com.example.eurder.security.Feature;
 import com.example.eurder.security.Role;
 
+import java.util.UUID;
+
 public class User {
+    private String userId;
     private String firstName;
     private String lastName;
     private String emailAddress;
@@ -14,6 +17,7 @@ public class User {
 
 
     public User(String firstName, String lastName, String emailAddress, String address, String phoneNumber, String password) {
+        this.userId = UUID.randomUUID().toString();
         this.firstName = firstName;
         this.lastName = lastName;
         this.emailAddress = emailAddress;
@@ -60,5 +64,9 @@ public class User {
     }
     public boolean canHaveAccessTo(Feature feature) {
         return role.containsFeature(feature);
+    }
+
+    public String getUserId() {
+        return userId;
     }
 }

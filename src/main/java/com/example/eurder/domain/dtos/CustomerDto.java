@@ -3,13 +3,15 @@ package com.example.eurder.domain.dtos;
 import java.util.Objects;
 
 public class CustomerDto {
+    private String customerID;
     private String firstName;
     private String lastName;
     private String emailAddress;
     private String address;
     private String phoneNumber;
 
-    public CustomerDto(String firstName, String lastName, String emailAddress, String address, String phoneNumber) {
+    public CustomerDto(String customerID, String firstName, String lastName, String emailAddress, String address, String phoneNumber) {
+        this.customerID = customerID;
         this.firstName = firstName;
         this.lastName = lastName;
         this.emailAddress = emailAddress;
@@ -57,5 +59,9 @@ public class CustomerDto {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getCustomerID() {
+        return customerID;
     }
 }

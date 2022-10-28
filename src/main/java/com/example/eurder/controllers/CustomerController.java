@@ -34,10 +34,17 @@ public class CustomerController {
         return customerService.addCustomer(newCustomerDto);
     }
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<CustomerDto> viewAllCustomer(@RequestHeader String authorization){
         log.info("retrieving all customers");
         securityService.validateAuthorization(authorization, Feature.VIEW_CUSTOMERS);
         return customerService.getAllCustomers();
+    }
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping(path ="/{id}" , produces = MediaType.APPLICATION_JSON_VALUE)
+    public CustomerDto viewSingleCustomer(@RequestHeader String authorization,@PathVariable String id){
+        log.info("retrieving customer");
+        securityService.validateAuthorization(authorization, Feature.VIEW_CUSTOMERS);
+        return customerService.getSingleCustomer(id);
     }
 }

@@ -28,4 +28,7 @@ public class UserRepository {
     public User getUser(String username) {
         return userDatabase.get(username);
     }
+    public User getUserByID(String id){
+        return userDatabase.values().stream().filter(user -> user.getUserId().equals(id)).findFirst().orElseThrow();
+    }
 }

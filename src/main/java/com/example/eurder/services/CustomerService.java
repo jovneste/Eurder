@@ -65,4 +65,8 @@ public class CustomerService {
        List<User> userList= userRepository.getUserDatabase().values().stream().filter(user -> user.getRole().equals(Role.CUSTOMER)).collect(Collectors.toList());
        return userList.stream().map(user -> customerMapper.customerToCustomerDto(user)).toList();
     }
+
+    public CustomerDto getSingleCustomer(String id) {
+        return customerMapper.customerToCustomerDto(userRepository.getUserByID(id));
+    }
 }
