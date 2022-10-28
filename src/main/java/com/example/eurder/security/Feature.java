@@ -1,5 +1,6 @@
 package com.example.eurder.security;
 
 public enum Feature {
-    ADD_ITEM
+    ADD_ITEM,
+    ORDER;
 }

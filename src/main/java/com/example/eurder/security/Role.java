@@ -6,7 +6,7 @@ import java.util.List;
 import static com.google.common.collect.Lists.newArrayList;
 
 public enum Role {
-    CUSTOMER(newArrayList()),
+    CUSTOMER(newArrayList(Feature.ORDER)),
     ADMIN(newArrayList(Feature.ADD_ITEM));
 
     private List<Feature> featureList;

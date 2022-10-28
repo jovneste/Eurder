@@ -6,13 +6,13 @@ public class Item {
     private String name;
     private String description;
     private BigDecimal price;
-    private int amount;
+    private int amountInStock;
 
-    public Item(String name, String description, BigDecimal price, int amount) {
+    public Item(String name, String description, BigDecimal price, int amountInStock) {
         this.name = name;
         this.description = description;
         this.price = price;
-        this.amount = amount;
+        this.amountInStock = amountInStock;
     }
 
     public String getName() {
@@ -27,7 +27,7 @@ public class Item {
         return price;
     }
 
-    public int getAmount() {
-        return amount;
+    public int getAmountInStock() {
+        return amountInStock;
     }
 }

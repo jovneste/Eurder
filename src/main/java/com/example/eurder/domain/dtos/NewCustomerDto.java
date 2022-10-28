@@ -5,24 +5,24 @@ import com.example.eurder.security.Role;
 public class NewCustomerDto {
     private String firstName;
     private String lastName;
-    private String emailAdress;
+    private String emailAddress;
     private String address;
     private String phoneNumber;
     private String password;
     private Role role;
 
 
-    public NewCustomerDto(String firstName, String lastName, String emailAdress, String address, String phoneNumber,String password) {
+    public NewCustomerDto(String firstName, String lastName, String emailAddress, String address, String phoneNumber,String password) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.emailAdress = emailAdress;
+        this.emailAddress = emailAddress;
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.password = password;
     }
 
     public String getEmailAddress() {
-        return emailAdress;
+        return emailAddress;
     }
 
     public String getFirstName() {

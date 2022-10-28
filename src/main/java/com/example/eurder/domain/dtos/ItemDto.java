@@ -6,13 +6,13 @@ public class ItemDto {
     private String name;
     private String description;
     private BigDecimal price;
-    private int amount;
+    private int amountInStock;
 
-    public ItemDto(String name, String description, BigDecimal price, int amount) {
+    public ItemDto(String name, String description, BigDecimal price, int amountInStock) {
         this.name = name;
         this.description = description;
         this.price = price;
-        this.amount = amount;
+        this.amountInStock = amountInStock;
     }
 
     public String getName() {
@@ -27,8 +27,8 @@ public class ItemDto {
         return price;
     }
 
-    public int getAmount() {
-        return amount;
+    public int getAmountInStock() {
+        return amountInStock;
     }
 
     public void setName(String name) {
@@ -43,7 +43,7 @@ public class ItemDto {
         this.price = price;
     }
 
-    public void setAmount(int amount) {
-        this.amount = amount;
+    public void setAmountInStock(int amountInStock) {
+        this.amountInStock = amountInStock;
     }
 }

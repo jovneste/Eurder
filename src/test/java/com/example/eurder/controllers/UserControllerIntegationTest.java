@@ -26,7 +26,7 @@ public class UserControllerIntegationTest {
     @Test
     void givenNewCustomer_CustomerIsAddedToBookRepository() {
 
-        String requestedBody = "{\"firstName\":\"Tom\",\"lastName\":\"a\",\"emailAddress\":\"g@h.com\",\"address\":\"nana\",\"phoneNumber\":\"1\"}";
+        String requestedBody = "{\"firstName\":\"Tom\",\"lastName\":\"a\",\"emailAddress\":\"g@h.com\",\"address\":\"nana\",\"phoneNumber\":\"1\",\"password\":\"pass\"}";
 
 
 
