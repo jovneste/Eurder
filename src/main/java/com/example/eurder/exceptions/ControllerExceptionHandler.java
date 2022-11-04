@@ -1,6 +1,8 @@
 package com.example.eurder.exceptions;
 
 import com.example.eurder.exceptions.customerexceptions.*;
+import com.example.eurder.exceptions.itemexceptions.ItemNotInDatabaseException;
+import com.example.eurder.exceptions.orderexceptions.CustomerNotInDatabaseException;
 import com.example.eurder.exceptions.securityexceptions.UnauthorizatedException;
 import com.example.eurder.exceptions.securityexceptions.UnknownUserException;
 import org.springframework.http.HttpStatus;
@@ -37,11 +39,19 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
     }
     @ExceptionHandler(UnauthorizatedException.class)
     protected void UnauthorizatedException(UnauthorizatedException ex, HttpServletResponse response) throws IOException{
-        response.sendError(HttpStatus.UNAUTHORIZED.value(),"You are not a registered customer, please register before continuing");
+        response.sendError(HttpStatus.UNAUTHORIZED.value(),"you are not authorised for his action");
     }
     @ExceptionHandler(UnknownUserException.class)
     protected void UnkowUserException(UnknownUserException ex, HttpServletResponse response) throws IOException{
         response.sendError(HttpStatus.UNAUTHORIZED.value(),"You are not a registered customer, please register before continuing");
+    }
+    @ExceptionHandler(CustomerNotInDatabaseException.class)
+    protected void CustomerNotInDatabaseException(CustomerNotInDatabaseException ex, HttpServletResponse response) throws IOException{
+        response.sendError(HttpStatus.FORBIDDEN.value(),"this customer does not exist");
+    }
+    @ExceptionHandler(ItemNotInDatabaseException.class)
+    protected void ItemNotInDatabaseException(ItemNotInDatabaseException ex, HttpServletResponse response) throws IOException{
+        response.sendError(HttpStatus.FORBIDDEN.value(),"this item doesn't exist");
     }
 
 

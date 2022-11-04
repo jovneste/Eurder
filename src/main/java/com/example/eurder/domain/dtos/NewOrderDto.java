@@ -8,12 +8,12 @@ import java.util.List;
 public class NewOrderDto {
 
 
-    private User customer;
+    private String customerID;
     private List<ItemGroup> itemGroupList;
 
-    public NewOrderDto(List<ItemGroup> itemGroupList, User customer) {
+    public NewOrderDto(List<ItemGroup> itemGroupList, String customerID) {
         this.itemGroupList = itemGroupList;
-        this.customer =customer;
+        this.customerID =customerID;
     }
 
     public List<ItemGroup> getItemGroupList() {
@@ -22,7 +22,11 @@ public class NewOrderDto {
 
 
 
-    public User getCustomer() {
-        return customer;
+    public String getCustomer() {
+        return customerID;
+    }
+
+    public void setCustomerID(String customerID) {
+        this.customerID = customerID;
     }
 }

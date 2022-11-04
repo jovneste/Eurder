@@ -32,8 +32,8 @@ class OrderControllerTest {
     @Test
     void customerMakesAnOrder_HappyPath(){
 
-        String requestedBody = "{\"customer\":{\"firstName\":\"a\",\"lastName\":\"b\",\"emailAdress\":\"A@B.com\",\"address\":\"str\",\"phoneNumber\":\"555\",\"password\":\"pass\"},\"itemGroupList\":[{\"item\":{\"name\":\"phoenixdown\",\"description\":\"item\",\"price\":5,\"amountInStock\":4},\"amountToOrder\":10}]}";
-        ReturnOrderDto result = RestAssured
+        String requestedBody = "{\"itemGroupList\":[{\"item\":{\"name\":\"phoenixdown\",\"description\":\"item\",\"price\":5,\"amountInStock\":4},\"amountToOrder\":10}]}";
+        RestAssured
                 .given()
                 .auth()
                 .preemptive()
@@ -47,9 +47,8 @@ class OrderControllerTest {
                 .post("/orders/")
                 .then()
                 .assertThat()
-                .statusCode(HttpStatus.CREATED.value())
-                .extract()
-                .as(ReturnOrderDto.class);
+                .statusCode(HttpStatus.CREATED.value());
+
     }
     @Test
     void unregisterdUserMakesAnOrder_HappyPath(){

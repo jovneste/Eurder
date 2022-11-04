@@ -5,6 +5,7 @@ import com.example.eurder.domain.dtos.NewOrderDto;
 import com.example.eurder.domain.dtos.ReturnOrderDto;
 import com.example.eurder.security.Feature;
 import com.example.eurder.security.SecurityService;
+import com.example.eurder.security.UsernamePassword;
 import com.example.eurder.services.OrderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,10 +27,14 @@ public class OrderController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ReturnOrderDto addCustomer(@RequestHeader String authorization, @RequestBody NewOrderDto newOrderDto){
+    public ReturnOrderDto addOrder(@RequestHeader String authorization, @RequestBody NewOrderDto newOrderDto){
         log.info("adding the following order " + newOrderDto);
         securityService.validateAuthorization(authorization, Feature.ORDER);
+        String username = securityService.getUsernamePassword(authorization).getUsername();
+        newOrderDto.setCustomerID(username);
+
         return orderService.addOrder(newOrderDto);
     }
+
 
 }

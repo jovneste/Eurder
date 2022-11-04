@@ -7,14 +7,14 @@ import java.util.UUID;
 public class Order {
     private String orderId;
 
-    private User customer;
+    private String customer;
     private List<ItemGroup> itemGroupList;
     private BigDecimal totalPrice;
 
-    public Order(List<ItemGroup> itemGroupList,User customer) {
+    public Order(List<ItemGroup> itemGroupList,String customerId) {
         this.orderId = UUID.randomUUID().toString();
         this.itemGroupList = itemGroupList;
-        this.customer = customer;
+        this.customer = customerId;
         this.totalPrice = calculateTotalPrice();
 
 
@@ -35,7 +35,7 @@ public class Order {
         return orderId;
     }
 
-    public User getCustomer() {
+    public String getCustomer() {
         return customer;
     }
 

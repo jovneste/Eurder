@@ -1,15 +1,21 @@
 package com.example.eurder.domain;
 
+import com.example.eurder.repositories.ItemRepository;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class ItemGroup {
+    private String itemName;
     private Item item;
     private int amountToOrder;
     private LocalDate shippingDate;
 
 
-    public ItemGroup(Item item, int amountToOrder, User customer) {
+
+    public ItemGroup(String itemName,Item item, int amountToOrder, User customer) {
+        this.itemName = itemName;
+
         this.item = item;
         this.amountToOrder = amountToOrder;
         if(item.getAmountInStock()<amountToOrder){
@@ -22,6 +28,10 @@ public class ItemGroup {
 
     public Item getItem() {
         return item;
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
     }
 
     public int getAmountToOrder() {

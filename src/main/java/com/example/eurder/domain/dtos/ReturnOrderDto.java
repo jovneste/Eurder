@@ -10,13 +10,13 @@ import java.util.UUID;
 public class ReturnOrderDto {
     private String orderId;
 
-    private User customer;
+    private String customerID;
     private List<ItemGroup> itemGroupList;
     private BigDecimal totalPrice;
 
-    public ReturnOrderDto(String orderId, User customer, List<ItemGroup> itemGroupList, BigDecimal totalPrice) {
+    public ReturnOrderDto(String orderId, String customerID, List<ItemGroup> itemGroupList, BigDecimal totalPrice) {
         this.orderId = orderId;
-        this.customer = customer;
+        this.customerID = customerID;
         this.itemGroupList = itemGroupList;
         this.totalPrice = totalPrice;
     }
@@ -25,8 +25,8 @@ public class ReturnOrderDto {
         return orderId;
     }
 
-    public User getCustomer() {
-        return customer;
+    public String getCustomer() {
+        return customerID;
     }
 
     public List<ItemGroup> getItemGroupList() {
