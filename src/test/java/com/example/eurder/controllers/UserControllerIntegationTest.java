@@ -15,6 +15,8 @@ import org.springframework.http.HttpStatus;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.hamcrest.Matchers.equalTo;
+
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class UserControllerIntegationTest {
 
@@ -28,10 +30,9 @@ public class UserControllerIntegationTest {
     CustomerService customerService;
 
     @Test
-    void givenNewCustomer_CustomerIsAddedToBookRepository() {
+    void givenNewCustomer_CustomerIsAddedToUserRepository() {
 
         String requestedBody = "{\"firstName\":\"Tom\",\"lastName\":\"a\",\"emailAddress\":\"g@h.com\",\"address\":\"nana\",\"phoneNumber\":\"1\",\"password\":\"pass\"}";
-
 
 
         CustomerDto result = RestAssured
@@ -50,16 +51,105 @@ public class UserControllerIntegationTest {
                 .as(CustomerDto.class);
 
     }
+
     @Test
-    void adminViewsAllCustomersHappyPath(){
+    void givenNewCustomerWithouteamil_ExceptionThrown() {
+
+        String requestedBody = "{\"firstName\":\"r\",\"lastName\":\"a\",\"emailAddress\":\"\",\"address\":\"nana\",\"phoneNumber\":\"1\",\"password\":\"pass\"}";
+
+
+        RestAssured
+                .given()
+                .contentType(ContentType.JSON)
+                .baseUri("http://localhost")
+                .port(port)
+                .body(requestedBody)
+                .when()
+                .accept(ContentType.JSON)
+                .post("/customers/")
+                .then()
+                .assertThat()
+                .statusCode(HttpStatus.FORBIDDEN.value())
+                .body("message", equalTo("emailAddress is required"));
+
+    }
+
+    @Test
+    void givenNewCustomerWithoutFirstName_ExceptionThrown() {
+
+        String requestedBody = "{\"firstName\":\"\",\"lastName\":\"a\",\"emailAddress\":\"g@h.com\",\"address\":\"nana\",\"phoneNumber\":\"1\",\"password\":\"pass\"}";
+
+
+        RestAssured
+                .given()
+                .contentType(ContentType.JSON)
+                .baseUri("http://localhost")
+                .port(port)
+                .body(requestedBody)
+                .when()
+                .accept(ContentType.JSON)
+                .post("/customers/")
+                .then()
+                .assertThat()
+                .statusCode(HttpStatus.FORBIDDEN.value())
+                .body("message", equalTo("firstname is required"));
+
+    }
+
+    @Test
+    void givenNewCustomerWithoutLastName_ExceptionThrown() {
+
+        String requestedBody = "{\"firstName\":\"d\",\"lastName\":\"\",\"emailAddress\":\"g@h.com\",\"address\":\"nana\",\"phoneNumber\":\"1\",\"password\":\"pass\"}";
+
+
+        RestAssured
+                .given()
+                .contentType(ContentType.JSON)
+                .baseUri("http://localhost")
+                .port(port)
+                .body(requestedBody)
+                .when()
+                .accept(ContentType.JSON)
+                .post("/customers/")
+                .then()
+                .assertThat()
+                .statusCode(HttpStatus.FORBIDDEN.value())
+                .body("message", equalTo("lastname is required"));
+
+    }
+    @Test
+    void givenNewCustomerWithoutPhoneNumber_ExceptionThrown() {
+
+        String requestedBody = "{\"firstName\":\"d\",\"lastName\":\"f\",\"emailAddress\":\"g@h.com\",\"address\":\"nana\",\"phoneNumber\":\"\",\"password\":\"pass\"}";
+
+
+        RestAssured
+                .given()
+                .contentType(ContentType.JSON)
+                .baseUri("http://localhost")
+                .port(port)
+                .body(requestedBody)
+                .when()
+                .accept(ContentType.JSON)
+                .post("/customers/")
+                .then()
+                .assertThat()
+                .statusCode(HttpStatus.FORBIDDEN.value())
+                .body("message", equalTo("Phone number is required"));
+
+    }
 
 
 
-          RestAssured
+    @Test
+    void adminViewsAllCustomersHappyPath() {
+
+
+        RestAssured
                 .given()
                 .auth()
                 .preemptive()
-                .basic("admin@eurder.com","root")
+                .basic("admin@eurder.com", "root")
                 .contentType(ContentType.JSON)
                 .baseUri("http://localhost")
                 .port(port)
@@ -71,14 +161,15 @@ public class UserControllerIntegationTest {
                 .statusCode(HttpStatus.OK.value());
 
     }
-    @Test
-    void customerTriesToViewsAllCustomers_ThrowsUnauthorisedException (){
 
-       RestAssured
+    @Test
+    void customerTriesToViewsAllCustomers_ThrowsUnauthorisedException() {
+
+        RestAssured
                 .given()
                 .auth()
                 .preemptive()
-                .basic("customer@eurder.com","root")
+                .basic("customer@eurder.com", "root")
                 .contentType(ContentType.JSON)
                 .baseUri("http://localhost")
                 .port(port)
@@ -92,8 +183,9 @@ public class UserControllerIntegationTest {
 
 
     }
+
     @Test
-    void AdminTriesToViewsSingleCustomer_HappyPath (){
+    void AdminTriesToViewsSingleCustomer_HappyPath() {
 
 
         String userId = userRepository.getUserByID(userRepository.getUserDatabase().get("customer@eurder.com").getUserId()).getUserId();
@@ -101,7 +193,7 @@ public class UserControllerIntegationTest {
                 .given()
                 .auth()
                 .preemptive()
-                .basic("admin@eurder.com","root")
+                .basic("admin@eurder.com", "root")
                 .contentType(ContentType.JSON)
                 .baseUri("http://localhost")
                 .port(port)
