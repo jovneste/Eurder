@@ -47,8 +47,9 @@ class OrderControllerTest {
                 .post("/orders/")
                 .then()
                 .assertThat()
-                .statusCode(HttpStatus.CREATED.value());
-
+                .statusCode(HttpStatus.CREATED.value())
+                .extract()
+                .as(ReturnOrderDto.class);
     }
     @Test
     void unregisterdUserMakesAnOrder_HappyPath(){

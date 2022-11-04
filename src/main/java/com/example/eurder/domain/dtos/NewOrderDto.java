@@ -22,7 +22,7 @@ public class NewOrderDto {
 
 
 
-    public String getCustomer() {
+    public String getCustomerID() {
         return customerID;
     }
 

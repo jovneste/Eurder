@@ -28,10 +28,12 @@ public class OrderController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ReturnOrderDto addOrder(@RequestHeader String authorization, @RequestBody NewOrderDto newOrderDto){
-        log.info("adding the following order " + newOrderDto);
-        securityService.validateAuthorization(authorization, Feature.ORDER);
         String username = securityService.getUsernamePassword(authorization).getUsername();
         newOrderDto.setCustomerID(username);
+        log.info("adding the following order " + newOrderDto);
+        securityService.validateAuthorization(authorization, Feature.ORDER);
+
+
 
         return orderService.addOrder(newOrderDto);
     }

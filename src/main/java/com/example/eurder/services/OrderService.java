@@ -38,7 +38,7 @@ public class OrderService {
 
         if (!userRepository.getUserDatabase().values().stream()
                 .map(User::getEmailAddress).toList()
-                .contains(newOrderDto.getCustomer())) {
+                .contains(newOrderDto.getCustomerID())) {
             throw new CustomerNotInDatabaseException();
 
         }

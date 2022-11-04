@@ -25,7 +25,7 @@ public class ReturnOrderDto {
         return orderId;
     }
 
-    public String getCustomer() {
+    public String getCustomerID() {
         return customerID;
     }
 
