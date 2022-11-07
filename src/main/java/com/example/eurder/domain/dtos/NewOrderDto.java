@@ -1,7 +1,7 @@
 package com.example.eurder.domain.dtos;
 
 import com.example.eurder.domain.ItemGroup;
-import com.example.eurder.domain.User;
+
 
 import java.util.List;
 
@@ -18,6 +18,11 @@ public class NewOrderDto {
 
     public List<ItemGroup> getItemGroupList() {
         return itemGroupList;
+    }
+
+    public ItemGroup getItemGroupFromList(int index){
+
+        return this.itemGroupList.get(index);
     }
 
 

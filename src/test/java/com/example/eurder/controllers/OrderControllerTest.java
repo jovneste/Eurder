@@ -32,7 +32,7 @@ class OrderControllerTest {
     @Test
     void customerMakesAnOrder_HappyPath(){
 
-        String requestedBody = "{\"itemGroupList\":[{\"item\":{\"name\":\"phoenixdown\",\"description\":\"item\",\"price\":5,\"amountInStock\":4},\"amountToOrder\":10}]}";
+        String requestedBody = "{\"itemGroupList\":[{\"itemName\":\"phoenix down\",\"amountToOrder\":10}]}";
         RestAssured
                 .given()
                 .auth()

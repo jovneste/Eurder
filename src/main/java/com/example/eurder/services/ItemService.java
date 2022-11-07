@@ -3,6 +3,7 @@ package com.example.eurder.services;
 import com.example.eurder.domain.Item;
 import com.example.eurder.domain.dtos.ItemDto;
 import com.example.eurder.domain.mappers.ItemMapper;
+import com.example.eurder.exceptions.itemexceptions.ItemNotInDatabaseException;
 import com.example.eurder.repositories.ItemRepository;
 import org.springframework.stereotype.Service;
 
@@ -21,4 +22,5 @@ public class ItemService {
         itemRepository.save(newItem);
         return itemMapper.ItemToItemDto(newItem);
     }
+
 }
