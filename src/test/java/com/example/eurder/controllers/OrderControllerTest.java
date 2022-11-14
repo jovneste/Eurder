@@ -97,5 +97,26 @@ class OrderControllerTest {
 
 
     }
+    @Test
+    void customerTriesToOrderANegativeAmount(){
+
+        String requestedBody = "{\"itemGroupList\":[{\"itemName\":\"phoenix down\",\"amountToOrder\":-1}]}";
+        RestAssured
+                .given()
+                .auth()
+                .preemptive()
+                .basic("customer@eurder.com","root")
+                .contentType(ContentType.JSON)
+                .baseUri("http://localhost")
+                .port(port)
+                .body(requestedBody)
+                .when()
+                .accept(ContentType.JSON)
+                .post("/orders/")
+                .then()
+                .assertThat()
+                .statusCode(HttpStatus.FORBIDDEN.value());
+
+    }
 
 }
