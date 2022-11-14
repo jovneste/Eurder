@@ -34,24 +34,23 @@ public class OrderService {
 
     }
 
-
-    public ReturnOrderDto addOrder(NewOrderDto newOrderDto) {
-
-        //check if item exists and adds the full item object to the itemgroup of itemgrouplist in neworderDto
+    private void itemChecker(NewOrderDto newOrderDto) {
         List<String> itemsWantedForOrder = newOrderDto.getItemGroupList().stream().map(ItemGroup::getItemName).toList();
         for (int i = 0; i < itemsWantedForOrder.size(); i++) {
             newOrderDto.getItemGroupFromList(i).setItem(getItemInDatabase(itemsWantedForOrder.get(i)));
         }
+    }
 
-       List<Integer> orderAmounts = newOrderDto.getItemGroupList().stream().map(ItemGroup::getAmountToOrder).toList();
-       for (Integer order:orderAmounts){
-           if(order<1){
-               throw new OrderAmountNotPositiveException();
-           }
-       }
+    private void amountOrderedChecker(NewOrderDto newOrderDto) {
+        List<Integer> orderAmounts = newOrderDto.getItemGroupList().stream().map(ItemGroup::getAmountToOrder).toList();
+        for (Integer order : orderAmounts) {
+            if (order < 1) {
+                throw new OrderAmountNotPositiveException();
+            }
+        }
+    }
 
-
-
+    private void getLoggedInUser(NewOrderDto newOrderDto) {
         //gets the the User
         if (!userRepository.getUserDatabase().values().stream()
                 .map(User::getEmailAddress).toList()
@@ -59,6 +58,17 @@ public class OrderService {
             throw new CustomerNotInDatabaseException();
 
         }
+    }
+
+
+    public ReturnOrderDto addOrder(NewOrderDto newOrderDto) {
+
+        //validators
+        itemChecker(newOrderDto);
+        amountOrderedChecker(newOrderDto);
+        getLoggedInUser(newOrderDto);
+
+
         Order newOrder = orderMapper.newOrderDtoToOrder(newOrderDto);
         orderRepository.saveOrder(newOrder);
         return orderMapper.orderToOrderDto(newOrder);
