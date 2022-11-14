@@ -1,12 +1,10 @@
 package com.example.eurder.controllers;
 
 
-import com.example.eurder.domain.dtos.CustomerDto;
 import com.example.eurder.domain.dtos.NewOrderDto;
 import com.example.eurder.domain.dtos.ReturnOrderDto;
 import com.example.eurder.security.Feature;
 import com.example.eurder.security.SecurityService;
-import com.example.eurder.security.UsernamePassword;
 import com.example.eurder.services.OrderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

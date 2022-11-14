@@ -1,9 +1,5 @@
 package com.example.eurder.domain;
 
-import com.example.eurder.exceptions.itemexceptions.ItemNotInDatabaseException;
-import com.example.eurder.repositories.ItemRepository;
-
-
 import java.time.LocalDate;
 
 public class ItemGroup {

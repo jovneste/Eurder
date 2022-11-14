@@ -25,6 +25,7 @@ public class ItemController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ItemDto addItem(@RequestHeader String authorization,@RequestBody ItemDto itemDto){
+        log.info("adding item");
         securityService.validateAuthorization(authorization, Feature.ADD_ITEM);
         return itemService.addItem(itemDto);
     }

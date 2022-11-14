@@ -5,11 +5,11 @@ import java.util.List;
 import java.util.UUID;
 
 public class Order {
-    private String orderId;
+    private final String orderId;
 
-    private String customerID;
-    private List<ItemGroup> itemGroupList;
-    private BigDecimal totalPrice;
+    private final String customerID;
+    private final List<ItemGroup> itemGroupList;
+    private final BigDecimal totalPrice;
 
     public Order(List<ItemGroup> itemGroupList,String customerID) {
         this.orderId = UUID.randomUUID().toString();

@@ -4,10 +4,10 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 public class Item {
-    private String name;
-    private String description;
-    private BigDecimal price;
-    private int amountInStock;
+    private final String name;
+    private final String description;
+    private final BigDecimal price;
+    private final int amountInStock;
 
     public Item(String name, String description, BigDecimal price, int amountInStock) {
         this.name = name;
@@ -30,9 +30,6 @@ public class Item {
 
     public int getAmountInStock() {
         return amountInStock;
-    }
-    public boolean doesItemNameMatch(String itemName){
-        return this.name.equals(itemName);
     }
 
     @Override

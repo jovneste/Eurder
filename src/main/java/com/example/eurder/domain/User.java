@@ -6,13 +6,13 @@ import com.example.eurder.security.Role;
 import java.util.UUID;
 
 public class User {
-    private String userId;
-    private String firstName;
-    private String lastName;
-    private String emailAddress;
-    private String address;
-    private String phoneNumber;
-    private String password;
+    private final String userId;
+    private final String firstName;
+    private final String lastName;
+    private final String emailAddress;
+    private final String address;
+    private final String phoneNumber;
+    private final String password;
     private Role role;
 
 
@@ -45,10 +45,6 @@ public class User {
 
     public String getPhoneNumber() {
         return phoneNumber;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public void setRole(Role role) {
