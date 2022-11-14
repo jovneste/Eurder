@@ -3,6 +3,7 @@ package com.example.eurder.exceptions;
 import com.example.eurder.exceptions.customerexceptions.*;
 import com.example.eurder.exceptions.itemexceptions.ItemNotInDatabaseException;
 import com.example.eurder.exceptions.orderexceptions.CustomerNotInDatabaseException;
+import com.example.eurder.exceptions.orderexceptions.OrderAmountNotPositiveException;
 import com.example.eurder.exceptions.securityexceptions.UnauthorizatedException;
 import com.example.eurder.exceptions.securityexceptions.UnknownUserException;
 import org.springframework.http.HttpStatus;
@@ -52,6 +53,10 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(ItemNotInDatabaseException.class)
     protected void ItemNotInDatabaseException(ItemNotInDatabaseException ex, HttpServletResponse response) throws IOException{
         response.sendError(HttpStatus.FORBIDDEN.value(),"this item doesn't exist");
+    }
+    @ExceptionHandler(OrderAmountNotPositiveException.class)
+    protected void OrderAmountNotPositiveException(OrderAmountNotPositiveException ex, HttpServletResponse response) throws IOException{
+        response.sendError(HttpStatus.FORBIDDEN.value(),"You can't order zero or a negative amount of something");
     }
 
 

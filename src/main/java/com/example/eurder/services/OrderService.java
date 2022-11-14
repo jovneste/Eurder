@@ -9,6 +9,7 @@ import com.example.eurder.domain.dtos.ReturnOrderDto;
 import com.example.eurder.domain.mappers.OrderMapper;
 import com.example.eurder.exceptions.itemexceptions.ItemNotInDatabaseException;
 import com.example.eurder.exceptions.orderexceptions.CustomerNotInDatabaseException;
+import com.example.eurder.exceptions.orderexceptions.OrderAmountNotPositiveException;
 import com.example.eurder.repositories.ItemRepository;
 import com.example.eurder.repositories.OrderRepository;
 import com.example.eurder.repositories.UserRepository;
@@ -36,13 +37,20 @@ public class OrderService {
 
     public ReturnOrderDto addOrder(NewOrderDto newOrderDto) {
 
-
-
         //check if item exists and adds the full item object to the itemgroup of itemgrouplist in neworderDto
         List<String> itemsWantedForOrder = newOrderDto.getItemGroupList().stream().map(ItemGroup::getItemName).toList();
         for (int i = 0; i < itemsWantedForOrder.size(); i++) {
             newOrderDto.getItemGroupFromList(i).setItem(getItemInDatabase(itemsWantedForOrder.get(i)));
         }
+
+       List<Integer> orderAmounts = newOrderDto.getItemGroupList().stream().map(ItemGroup::getAmountToOrder).toList();
+       for (Integer order:orderAmounts){
+           if(order<1){
+               throw new OrderAmountNotPositiveException();
+           }
+       }
+
+
 
         //gets the the User
         if (!userRepository.getUserDatabase().values().stream()
