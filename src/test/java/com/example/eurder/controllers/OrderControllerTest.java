@@ -8,7 +8,7 @@ import com.example.eurder.repositories.OrderRepository;
 import com.example.eurder.repositories.UserRepository;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
-import org.junit.jupiter.api.Assertions;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -137,6 +137,26 @@ class OrderControllerTest {
                 .then()
                 .assertThat()
                 .statusCode(HttpStatus.FORBIDDEN.value());
+
+
+    }
+    @Test
+    void adminViewsAllOrders(){
+
+        RestAssured
+                .given()
+                .auth()
+                .preemptive()
+                .basic("admin@eurder.com","root")
+                .contentType(ContentType.JSON)
+                .baseUri("http://localhost")
+                .port(port)
+                .when()
+                .accept(ContentType.JSON)
+                .get("/orders/")
+                .then()
+                .assertThat()
+                .statusCode(HttpStatus.OK.value());
 
 
     }
