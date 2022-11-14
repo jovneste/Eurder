@@ -32,7 +32,7 @@ public class OrderService {
 
     }
 
-    private void itemChecker(NewOrderDto newOrderDto) {
+    private void itemExistsChecker(NewOrderDto newOrderDto) {
         List<String> itemsWantedForOrder = newOrderDto.getItemGroupList().stream().map(ItemGroup::getItemName).toList();
         for (int i = 0; i < itemsWantedForOrder.size(); i++) {
             newOrderDto.getItemGroupFromList(i).setItem(getItemInDatabase(itemsWantedForOrder.get(i)));
@@ -48,8 +48,8 @@ public class OrderService {
         }
     }
 
-    private void getLoggedInUser(NewOrderDto newOrderDto) {
-        //gets the the User
+    private void DoesUserExist(NewOrderDto newOrderDto) {
+
         if (!userRepository.getUserDatabase().values().stream()
                 .map(User::getEmailAddress).toList()
                 .contains(newOrderDto.getCustomerID())) {
@@ -62,9 +62,9 @@ public class OrderService {
     public ReturnOrderDto addOrder(NewOrderDto newOrderDto) {
 
         //validators
-        itemChecker(newOrderDto);
+        itemExistsChecker(newOrderDto);
         amountOrderedChecker(newOrderDto);
-        getLoggedInUser(newOrderDto);
+        DoesUserExist(newOrderDto);
 
 
         Order newOrder = orderMapper.newOrderDtoToOrder(newOrderDto);
